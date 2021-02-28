@@ -6,6 +6,7 @@ buildscript {
     ext.gson = "2.8.6"
     ext.room_version = "2.2.6"
     ext.mockk_version = "1.10.6"
+    ext.okhttp3 = "4.9.0"
     repositories {
         google()
         jcenter()
