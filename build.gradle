@@ -5,6 +5,7 @@ buildscript {
     ext.retrofit = "2.9.0"
     ext.gson = "2.8.6"
     ext.room_version = "2.2.6"
+    ext.mockk_version = "1.10.6"
     repositories {
         google()
         jcenter()
