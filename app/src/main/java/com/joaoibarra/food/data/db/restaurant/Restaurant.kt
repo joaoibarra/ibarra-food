@@ -6,7 +6,6 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class Restaurant(
-    @PrimaryKey val id: Int,
     @ColumnInfo(name = "name") val name: String,
     @ColumnInfo(name = "status") val status: String?,
     @ColumnInfo(name = "bestMatch") val bestMatch: Float?,
@@ -17,4 +16,7 @@ data class Restaurant(
     @ColumnInfo(name = "averageProductPrice") val averageProductPrice: Float?,
     @ColumnInfo(name = "deliveryCosts") val deliveryCosts: Float?,
     @ColumnInfo(name = "minCost") val minCost: Float?
-)
+) {
+    @PrimaryKey(autoGenerate = true)
+    var id: Int = 0
+}

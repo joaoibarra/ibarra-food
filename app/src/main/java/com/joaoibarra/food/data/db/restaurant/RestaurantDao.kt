@@ -16,4 +16,7 @@ interface RestaurantDao {
 
     @Query("SELECT * FROM restaurant WHERE id LIKE :restaurantId")
     fun findById(restaurantId: Int): Restaurant?
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertList(restaurant: List<Restaurant>)
 }
