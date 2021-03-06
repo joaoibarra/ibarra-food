@@ -2,8 +2,9 @@ package com.joaoibarra.food.ui.restaurant
 
 import com.joaoibarra.food.data.db.restaurant.Restaurant
 import com.joaoibarra.food.data.remote.IbarraFoodApi
-import com.joaoibarra.food.data.remote.Result
+import com.joaoibarra.food.data.remote.domain.restaurant.RestaurantListResponse
 import io.mockk.MockKAnnotations
+import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
 import io.mockk.mockk
@@ -11,11 +12,15 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.runBlockingTest
+import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.ResponseBody
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotEquals
 import org.junit.Before
 import org.junit.Test
 import retrofit2.HttpException
+import retrofit2.Response
 
 class RestaurantRepositoryTest {
     @MockK
@@ -32,18 +37,21 @@ class RestaurantRepositoryTest {
         MockKAnnotations.init(this, relaxUnitFun = true)
     }
 
-    private val restaurantsResponseSuccess = Result.Success(restaurantResponse)
+    private val restaurantsResponseSuccess = Response.success(restaurantResponse)
 
     @Test
     fun `when api returns 401 should return empty list`() =
         runBlocking {
-            mockException = mockk {
-                every { code() } returns 401
-            }
-            val restaurantsResponseError = Result.Error(mockException)
+            val restaurantsResponseError = Response.error<RestaurantListResponse>(
+                401,
+                mockk<ResponseBody>() {
+                    every { contentType() } returns "application/json; charset=UTF-8".toMediaType()
+                    every { contentLength() } returns 1000L
+                }
+            )
 
             ibarraFoodApi = mockk {
-                every { getRestaurants() } returns restaurantsResponseError
+                coEvery { getRestaurants() } returns restaurantsResponseError
             }
             assertNotEquals(restaurantsResponseSuccess, ibarraFoodApi.getRestaurants())
             assertEquals(restaurantsResponseError, ibarraFoodApi.getRestaurants())
@@ -52,14 +60,17 @@ class RestaurantRepositoryTest {
     @Test
     fun `when api returns 500 should return empty list`() =
         runBlocking {
-            mockException = mockk {
-                every { code() } returns 500
-            }
-            val restaurantsResponseError = Result.Error(mockException)
-
+            val restaurantsResponseError = Response.error<RestaurantListResponse>(
+                500,
+                mockk<ResponseBody>() {
+                    every { contentType() } returns "application/json; charset=UTF-8".toMediaType()
+                    every { contentLength() } returns 1000L
+                }
+            )
             ibarraFoodApi = mockk {
-                every { getRestaurants() } returns restaurantsResponseError
+                coEvery { getRestaurants() } returns restaurantsResponseError
             }
+
             assertNotEquals(restaurantsResponseSuccess, ibarraFoodApi.getRestaurants())
             assertEquals(restaurantsResponseError, ibarraFoodApi.getRestaurants())
         }
@@ -67,10 +78,10 @@ class RestaurantRepositoryTest {
     @Test
     fun `when api returns 200 should return a list`() =
         runBlocking {
-            val restaurantsResponseError = Result.Success(restaurantsResponseSuccess)
+            val restaurantsResponseError = Response.success(restaurantsResponseSuccess)
 
             ibarraFoodApi = mockk {
-                every { getRestaurants() } returns restaurantsResponseSuccess
+                coEvery { getRestaurants() } returns restaurantsResponseSuccess
             }
             assertEquals(restaurantsResponseSuccess, ibarraFoodApi.getRestaurants())
             assertNotEquals(restaurantsResponseError, ibarraFoodApi.getRestaurants())
