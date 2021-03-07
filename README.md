@@ -18,8 +18,9 @@ Currently the project have some features:
 ### What's next ###
 - Implement search filters;
 - Improve all tests(Mainly idle state for Fragment);
-- Improve layout and interactions
+- Improve layout and interactions;
 - Used Room for database and Retrofit with a mock API, so will be easy to connect with any API or create a pagination;
+- Improve CI adding more tasks to Github Actions
 
 ### Run tests ###
 Its possible to run unit tests directly in IDEA or using the command below:
