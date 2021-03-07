@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Food</string>
+    <string name="menu_search">Search</string>
+    <string name="menu_filters">Filters</string>
+    <string name="menu_search_filter_best_match">Best match</string>
+    <string name="menu_search_filter_newest">Newest</string>
+    <string name="menu_search_filter_rating">Rating average</string>
+    <string name="menu_search_filter_distance">Distance</string>
+    <string name="menu_search_filter_popularity">Popularity</string>
+    <string name="menu_search_filter_price">Average product price</string>
+    <string name="menu_search_filter_cost">Delivery costs or the minimum cost</string>
+    <string name="distance_in_meters">%.2f m</string>
 </resources>

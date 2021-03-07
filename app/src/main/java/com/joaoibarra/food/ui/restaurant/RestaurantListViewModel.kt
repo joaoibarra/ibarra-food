@@ -1,13 +1,9 @@
 package com.joaoibarra.food.ui.restaurant
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.joaoibarra.food.data.db.restaurant.Restaurant
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 
 class RestaurantListViewModel(
     private val repository: RestaurantRepository
@@ -20,15 +16,20 @@ class RestaurantListViewModel(
         fetchRestaurants()
     }
 
-    private fun fetchRestaurants() {
+    fun fetchRestaurants(keyword: String = "") {
         viewModelScope.launch (Dispatchers.IO) {
-            repository.getRestaurants().collect { _restaurants.postValue(it) }
+            repository.getRestaurants(keyword).collect {
+                _restaurants.postValue(it)
+            }
+            currentCoroutineContext().cancel()
         }
     }
 
     fun toogleFavoriteRestaurant(restaurant: Restaurant) {
         viewModelScope.launch (Dispatchers.IO) {
+            currentCoroutineContext().ensureActive()
             repository.favoriteRestaurant(restaurant).collect {  }
         }
     }
+
 }

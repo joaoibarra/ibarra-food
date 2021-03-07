@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.home.activities.TransactionSearchActivity">
+    <item
+        android:id="@+id/action_search"
+        android:icon="@drawable/ic_search_white_36dp"
+        android:title="@string/menu_search"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/menu_item_action_parameters"
+        android:title="@string/menu_filters"
+        android:icon="@drawable/ic_filter_list_white_36dp"
+        app:showAsAction="ifRoom|withText">
+        <menu>
+            <item
+                android:id="@+id/action_search_filter_best_match"
+                android:title="@string/menu_search_filter_best_match" />
+            <item
+                android:id="@+id/action_search_filter_newest"
+                android:title="@string/menu_search_filter_newest" />
+            <item
+                android:id="@+id/action_search_filter_rating"
+                android:title="@string/menu_search_filter_rating" />
+            <item
+                android:id="@+id/action_search_filter_distance"
+                android:title="@string/menu_search_filter_distance" />
+            <item
+                android:id="@+id/action_search_filter_popularity"
+                android:title="@string/menu_search_filter_popularity" />
+            <item
+                android:id="@+id/action_search_filter_price"
+                android:title="@string/menu_search_filter_price" />
+            <item
+                android:id="@+id/action_search_filter_cost"
+                android:title="@string/menu_search_filter_cost" />
+        </menu>
+    </item>
+</menu>
