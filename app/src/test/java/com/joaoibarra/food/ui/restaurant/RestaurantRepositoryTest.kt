@@ -8,6 +8,7 @@ import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
 import io.mockk.mockk
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.runBlocking
@@ -88,6 +89,7 @@ class RestaurantRepositoryTest {
         }
 
     @Test
+    @ExperimentalCoroutinesApi
     fun `when api returns with success repository should return a list`() =
         runBlockingTest {
             restaurantRepository = mockk {
@@ -100,6 +102,7 @@ class RestaurantRepositoryTest {
         }
 
     @Test
+    @ExperimentalCoroutinesApi
     fun `when api returns with success repository should return a empty list`() =
         runBlockingTest {
             restaurantRepository = mockk {

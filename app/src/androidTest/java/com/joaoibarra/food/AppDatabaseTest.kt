@@ -44,6 +44,7 @@ class AppDatabaseTest {
     fun shouldFindRestaurantThatExist() {
         val restaurant = mockk<Restaurant> {
             every { id } returns 27
+            every { isFavorite } returns false
             every { name } returns "Tanoshii Sushi"
             every { status } returns "open"
             every { bestMatch } returns 0.0f
@@ -57,7 +58,7 @@ class AppDatabaseTest {
         }
         restaurantDao.insertOrUpdate(restaurant)
         val restaurantById = restaurantDao.findById(27)
-        Assert.assertThat(restaurantById, Matchers.equalTo(restaurant))
+        Assert.assertEquals(restaurantById, restaurant)
     }
 
     @Test
@@ -65,6 +66,7 @@ class AppDatabaseTest {
     fun shouldNotFindRestaurantThatNotExist() {
         val restaurant = mockk<Restaurant> {
             every { id } returns 27
+            every { isFavorite } returns false
             every { name } returns "Tanoshii Sushi"
             every { status } returns "open"
             every { bestMatch } returns 0.0f
