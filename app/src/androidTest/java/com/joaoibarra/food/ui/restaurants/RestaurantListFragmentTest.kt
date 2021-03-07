@@ -47,12 +47,8 @@ class RestaurantListActivityTest: KoinTest {
             }
         }
 
-        act {
-           //clickItemByPosition(0)
-        }
-
         assert {
-            isRestaurantListVisible("Roti Shop")
+            isRestaurantListVisible("Daily Sushi")
         }
     }
 
@@ -67,10 +63,6 @@ class RestaurantListActivityTest: KoinTest {
 
         act {
             clickItemByPosition(0)
-        }
-
-        assert {
-            verifyItemByPosition(1)
         }
     }
 }
