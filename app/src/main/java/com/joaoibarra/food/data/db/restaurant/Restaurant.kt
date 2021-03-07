@@ -19,4 +19,19 @@ data class Restaurant(
 ) {
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0
+
+    @ColumnInfo(name = "isFavorite") var isFavorite: Boolean = false
+
+    override fun equals(other: Any?): Boolean {
+        return when(other) {
+            is Restaurant -> {
+                id == other.id && name == other.name && isFavorite == other.isFavorite
+            }
+            else -> false
+        }
+    }
+
+    override fun hashCode(): Int {
+        return name.plus(id).toInt()
+    }
 }

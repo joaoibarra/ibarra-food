@@ -1,22 +1,22 @@
 package com.joaoibarra.food.data.db.restaurant
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
-import javax.sql.DataSource
+import androidx.room.*
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface RestaurantDao {
     @Query("SELECT * FROM restaurant")
-    fun getAll(): List<Restaurant>
+    fun getAll(): Flow<List<Restaurant>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(restaurant: Restaurant)
+    fun insertOrUpdate(restaurant: Restaurant)
 
     @Query("SELECT * FROM restaurant WHERE id LIKE :restaurantId")
     fun findById(restaurantId: Int): Restaurant?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertList(restaurant: List<Restaurant>)
+
+    @Update
+    fun update(restaurant: Restaurant)
 }

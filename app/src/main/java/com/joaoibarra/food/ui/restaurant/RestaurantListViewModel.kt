@@ -25,4 +25,10 @@ class RestaurantListViewModel(
             repository.getRestaurants().collect { _restaurants.postValue(it) }
         }
     }
+
+    fun toogleFavoriteRestaurant(restaurant: Restaurant) {
+        viewModelScope.launch (Dispatchers.IO) {
+            repository.favoriteRestaurant(restaurant).collect {  }
+        }
+    }
 }
