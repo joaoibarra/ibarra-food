@@ -32,12 +32,14 @@ class RestaurantListFragment: Fragment() {
     }
 
     private fun setAdapter() {
+        restaurantAdapter = RestaurantAdapter(
+            restaurantListViewModel,
+            viewLifecycleOwner
+        )
+        binding?.adapter = restaurantAdapter
         restaurantListViewModel.restaurants.observe(viewLifecycleOwner) { list ->
-            restaurantAdapter = RestaurantAdapter(
-                list,
-                restaurantListViewModel
-            )
-            binding?.adapter = restaurantAdapter
+            restaurantAdapter?.submitList(list)
+            restaurantAdapter?.notifyDataSetChanged()
         }
     }
 }

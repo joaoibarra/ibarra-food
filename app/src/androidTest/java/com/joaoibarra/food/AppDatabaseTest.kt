@@ -55,7 +55,7 @@ class AppDatabaseTest {
             every { deliveryCosts } returns 200f
             every { minCost } returns 1000f
         }
-        restaurantDao.insert(restaurant)
+        restaurantDao.insertOrUpdate(restaurant)
         val restaurantById = restaurantDao.findById(27)
         Assert.assertThat(restaurantById, Matchers.equalTo(restaurant))
     }
@@ -76,7 +76,7 @@ class AppDatabaseTest {
             every { deliveryCosts } returns 200f
             every { minCost } returns 1000f
         }
-        restaurantDao.insert(restaurant)
+        restaurantDao.insertOrUpdate(restaurant)
         val restaurantById = restaurantDao.findById(28)
         Assert.assertNotEquals(restaurantById, Matchers.equalTo(restaurant))
         Assert.assertEquals(restaurantById, null)
