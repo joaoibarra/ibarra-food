@@ -87,17 +87,4 @@ class RestaurantListActivityAssertRobot {
             )
         )
     }
-
-    fun verifyItemByPosition(position: Int = 0) {
-//        Espresso.onView(ViewMatchers.withId(R.id.restaurantList))
-//            .check(
-//                ViewAssertions.matches(
-//                    ViewMatchers.at
-//                    atPosition<RestaurantAdapter.RestaurantViewHolder>(
-//                        position,
-//                        ViewMatchers.withText("Test Text")
-//                    )
-//                )
-//            )
-    }
 }

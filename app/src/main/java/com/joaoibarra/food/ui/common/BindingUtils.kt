@@ -13,7 +13,7 @@ fun RecyclerView.bindRecyclerViewAdapter(adapter: RecyclerView.Adapter<*>?) {
     }
 }
 
-@BindingAdapter("app:favIcon")
+@BindingAdapter("favIcon")
 fun favIcon(v: AppCompatImageView, isFavorite: Boolean) {
     val drawableRes: Int =
         if (isFavorite) R.drawable.ic_favorite_black_48dp else R.drawable.ic_favorite_border_black_48dp

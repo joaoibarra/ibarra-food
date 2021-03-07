@@ -19,8 +19,8 @@ android {
         testInstrumentationRunner "com.joaoibarra.food.TestAppJUnitRunner"
     }
 
-    dataBinding {
-        enabled = true
+    buildFeatures  {
+        dataBinding = true
     }
 
     buildTypes {
@@ -101,4 +101,11 @@ dependencies {
         exclude module: 'recyclerview-v7'
     }
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+}
+tasks.withType(Test) {
+    testLogging {
+        exceptionFormat "full"
+        events "started", "skipped", "passed", "failed"
+        showStandardStreams true
+    }
 }
